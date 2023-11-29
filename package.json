@@ -1,0 +1,30 @@
+{
+  "name": "cpu-battle-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "set NODE_ENV=dev && nodemon app.js",
+    "prod": "set NODE_ENV=prod && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v1tor2003/CPUBattle.git"
+  },
+  "author": "Vitor Pires, Pedro Affonso, 2023-11-29",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/v1tor2003/CPUBattle/issues"
+  },
+  "homepage": "https://github.com/v1tor2003/CPUBattle#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
