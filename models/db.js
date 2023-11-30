@@ -20,14 +20,13 @@ class DataBase extends Singleton{
     }
   }
 
-  async query(sql, params){
-    try{
-      const [rows, fields] = await this.connection.execute(sql, params)
-      return rows;
-    }catch(error){
-      console.error('Error perfoming query:', error)
-      throw error
-    }
+  query(sql, callback){
+    this.connection.query(sql, (error, results, fields) => {
+      if(error) throw error
+      console.log(results)
+
+      callback(results)
+    })
   }
 }
 
@@ -35,7 +34,8 @@ const dbCredentials = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 }
 
 const db = new DataBase(dbCredentials)
