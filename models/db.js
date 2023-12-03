@@ -20,12 +20,13 @@ class DataBase extends Singleton{
     }
   }
 
-  query(sql, callback){
-    this.connection.query(sql, (error, results, fields) => {
-      if(error) throw error
-      console.log(results)
-
-      callback(results)
+  execute(query, params){
+    console.log('Executing: ', query)
+    return new Promise((resolve, reject) => {
+      this.connection.query(query, params, (err, results) => {
+        if(err) reject(err)
+        else resolve(results)
+      })
     })
   }
 }
