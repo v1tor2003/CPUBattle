@@ -8,20 +8,25 @@ import { fileURLToPath } from 'url'
 import 'dotenv/config'
 
 import userRouter from './routes/userRoutes.js'
-
+import authRouter from './routes/authRoutes.js'
 const app = express()
 const PORT = process.env.PORT
 const NODE_ENV = process.env.NODE_ENV
 const ROOT_DIR = path.resolve(dirname(fileURLToPath(import.meta.url)))
+
 // custom routes
 app.use(userRouter)
+app.use(authRouter)
 
 // layout extension to improve views rendering
 app.use(expressLayouts)
 
 // body parser and session for auth
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(session({secret: process.env.SECRET_KEY, resave: true, saveUninitialized: true}))
+//app.use(bodyParser.urlencoded({extended:true}))
+app.use(session({
+  secret: process.env.SECRET_KEY, 
+  resave: false, saveUninitialized: true
+}))
 
 // assets
 app.use(express.static('public'))
