@@ -1,7 +1,7 @@
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
-import bodyParser from 'body-parser'
 import session from 'express-session'
+
 import path from 'path'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -9,28 +9,37 @@ import 'dotenv/config'
 
 import userRouter from './routes/userRoutes.js'
 import authRouter from './routes/authRoutes.js'
-const app = express()
+import benchRouter from './routes/benchRoutes.js'
+
 const PORT = process.env.PORT
 const NODE_ENV = process.env.NODE_ENV
 const ROOT_DIR = path.resolve(dirname(fileURLToPath(import.meta.url)))
+const app = express()
 
-// custom routes
-app.use(userRouter)
-app.use(authRouter)
-
-// layout extension to improve views rendering
-app.use(expressLayouts)
-
-// body parser and session for auth
-//app.use(bodyParser.urlencoded({extended:true}))
+// session for auth
 app.use(session({
   secret: process.env.SECRET_KEY, 
   resave: false, saveUninitialized: true
 }))
 
+// body parser 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+
+
+// custom routes
+app.use(authRouter)
+
+// layout extension to improve views rendering
+app.use(expressLayouts)
+app.use(userRouter)
+app.use(benchRouter)
+
 // assets
 app.use(express.static('public'))
 app.use('/js', express.static(path.join(ROOT_DIR, 'public/js')))
+app.use('/img', express.static(path.join(ROOT_DIR, 'public/img')))
 app.use('/css', express.static(path.join(ROOT_DIR, 'node_modules', 'bootstrap', 'dist','css')))
 
 
@@ -40,15 +49,7 @@ app.set('view engine', 'ejs')
 
 // default root route
 app.get('/', (req, res) => {
-  res.render('pages/index', {text: 'test message'})
-})
-
-app.get('/auth-form-login', (req, res) => {
-  res.render('pages/userForm')
-})
-
-app.get('/auth-form-register', (req, res) => {
-  res.render('pages/userForm')
+  res.render('pages/index', { user: req.session.user})
 })
 
 // live server setup

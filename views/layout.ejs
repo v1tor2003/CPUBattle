@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <title></title>
-</head>
+<%- include('components/head.ejs', {title: 'CPU Battle'}) %>
 <body>
     <header>
-        <%- include('components/navbar.ejs', { authLoginForm: '/auth-login', authRegisterForm: '/auth-register'}) %>
+        <%- include('components/navbar.ejs') %>
     </header>
     <main>
         <%- body %>
@@ -17,4 +10,3 @@
 
     </footer>
 </body>
-</html>

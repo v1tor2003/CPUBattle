@@ -1,17 +1,24 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="/">CPU Battle</a>
+    <img class="d-inline-block align-top" src="/img/logo.png" width="50" height="50" alt="logo">
+    <span class="navbar-text ms-2 fw-semi-bold">CPU Battle</span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item me-2">
-          <a href="<%= authLoginForm %>" class="btn btn-primary fs-10">Entrar</a>
-        </li>
-        <li class="nav-item me-2">
-          <a href="<%= authRegisterForm %>" class="btn btn-outline-primary fs-10">Registrar</a>
-        </li>
+        <% if(user) { %>
+          <li class="nav-item me-2">
+            <a href="/logout" class="btn btn-outline-primary fs-10">Log Out</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item me-2">
+            <a href="/auth-login" class="btn btn-primary fs-10">Log In</a>
+          </li>
+          <li class="nav-item me-2">
+            <a href="/auth-register" class="btn btn-outline-primary fs-10">Sign Up</a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>
