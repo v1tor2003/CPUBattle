@@ -1,0 +1,63 @@
+<!-- Modal -->
+<%- include('../components/addModal.ejs') %>
+
+<div class="container mt-5 d-flex-row text-center">
+  <% if (typeof error !== 'undefined' && error !== null) { %>
+    <div class="alert alert-danger mt-3" role="alert">
+      <%= error %>
+    </div>
+  <% } %>
+
+  <% if (typeof success !== 'undefined' && success !== null) { %>
+    <div class="alert alert-success mt-3" role="alert">
+      <%= success %>
+    </div>
+  <% } %>
+  <% if(user) {%>
+    <h2>Logged as <%= user.user_name %></h2>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Create a new Benchmark</button>
+  <% } %>
+  <h2>Results From Our Database</h2>
+  
+  
+  <table class="table table-bordered mx-auto ">
+    <thead>
+      <tr>
+        <th scope="col" class="col">#</th>
+        <th scope="col" class="col-2">Score</th>
+        <th scope="col" class="col-2">Processor</th>
+        <th scope="col" class="col-2">Benched at</th>
+        <th scope="col" class="col-2">By User</th>
+        <th scope="col" class="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% if(data.row_count) {%>
+      <h3>Found: <%=data.row_count%> records</h3>
+      <% } %>
+      <% data.forEach(bench => { %>
+          <tr></tr>
+          <th scope="row"><%= bench.id %></th>
+          <td><%= bench.mutl_score %></td>
+          <td><%= bench.processor_model %></td>
+          <td><%= bench.benched_at %></td>
+          <td><%= bench.user_name %></td>
+          <td>
+            <%- include('../components/viewModal.ejs', {bench}) %>
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#viewModal<%= bench.id%>">View</button>
+             <% if(user) { %> 
+              <%- include('../components/editModal.ejs', {bench}) %>
+              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editModal<%= bench.id%>">Edit</button>
+              <%- include('../components/deleteModal.ejs', {bench}) %>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<%= bench.id%>">Delete</button>
+            <% } %> 
+          </td>
+        <%})%>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

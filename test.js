@@ -1,5 +1,6 @@
-import User from './models/user.js'
-const email = 'joao@bar'
-const res = await User.findByEmail(email)
-if(res[0])
-  console.log(res[0].username)
+import db from "./models/db.js";
+
+
+const query = await db.execute('DELETE FROM bench WHERE id = ?', [2])
+
+console.log(query)

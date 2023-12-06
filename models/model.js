@@ -40,6 +40,18 @@ export default class Model {
     return await this.performQuery(sql, params)
   }
 
+
+  async insertAndGetId(data){
+    try{
+      const res = await this.create(data)
+      if(res.affectedRows > 0) return res.insertId
+      else return -1
+    }catch(err){
+      console.error(err)
+      throw err
+    }
+    
+  }
   async performQuery(sql, params){
     try{
       const res = await db.execute(sql, params)

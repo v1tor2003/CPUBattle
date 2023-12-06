@@ -1,7 +1,13 @@
+<style>
+  a { 
+    text-decoration: none;
+  }
+</style>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <img class="d-inline-block align-top" src="/img/logo.png" width="50" height="50" alt="logo">
-    <span class="navbar-text ms-2 fw-semi-bold">CPU Battle</span>
+    <a href="/" class="navbar-text ms-2 fw-semi-bold">CPU Battle</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,10 +19,10 @@
           </li>
         <% } else { %>
           <li class="nav-item me-2">
-            <a href="/auth-login" class="btn btn-primary fs-10">Log In</a>
+            <a href="/auth-login" class="btn btn-outline-primary fs-10">Log In</a>
           </li>
           <li class="nav-item me-2">
-            <a href="/auth-register" class="btn btn-outline-primary fs-10">Sign Up</a>
+            <a href="/auth-register" class="btn btn-primary fs-10">Sign Up</a>
           </li>
         <% } %>
       </ul>

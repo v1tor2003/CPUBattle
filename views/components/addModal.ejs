@@ -1,0 +1,82 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Benchmark</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form action="/create-benchmark" method="POST">
+                <div class="form-group mt-2 fw-bold">
+                  Benchmark Results
+                </div>
+                <div class="form-group">
+                  <label>Multi-Thread Score</label>
+                  <input type="text" pattern="[0-9]+(\.[0-9]{1,2})?" name="mult_score" placeholder="500000.00" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Single-Thread Score</label>
+                  <input type="text" pattern="[0-9]+(\.[0-9]{1,2})?" name="single_score" placeholder="5000.00" class="form-control" required>
+                </div>
+                <div class="form-group mt-2 fw-bold">
+                  Processor
+                </div>
+                <div class="form-group">
+                  <label>Manufacturer</label>
+                  <select name="manufacturer" class="form-control" required>
+                    <option value="Intel" selected>Intel</option>
+                    <option value="AMD">AMD</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Model</label>
+                  <input type="text" name="model" placeholder="i7-7700k" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Socket</label>
+                  <input type="text" name="socket" placeholder="LGA 1151" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Speed</label>
+                  <input type="number" name="speed" placeholder="4.0" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Cores</label>
+                  <select name="cores" class="form-control" required>
+                    <option value="2" selected>2</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="32">32</option>
+                    <option value="64">64</option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Threads</label>
+                  <select name="threads" class="form-control" required>
+                    <option value="4" selected>4</option>
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="32">32</option>
+                    <option value="64">64</option>
+                    <option value="128">128</option>
+                </select>
+                </div>
+                <div class="form-group">
+                  <label><span class="fw-bold m-2">Benched at</span></label>
+                  <input type="date" name="bench_date" class="form-control" required>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-outline-primary">Add</button>
+          </div>
+        </form>
+
+      </div>
+  </div>
+</div>

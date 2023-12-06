@@ -14,7 +14,7 @@ class AuthController{
     try {
       const userEmail = req.body.email
       const user = await User.findByEmail(userEmail)
-      if(user[0] && user[0].password == req.body.password){
+      if(user[0] && user[0].user_password == req.body.password){
         req.session.regenerate((err) => {
           if(err) next(err)
           req.session.user = userEmail
@@ -25,7 +25,7 @@ class AuthController{
 
           req.session.save((err) => {
             if(err) return err
-            res.redirect('/dash')
+            res.redirect('/dashboard')
           })
         })  
       }else{
@@ -42,14 +42,14 @@ class AuthController{
 
     try{
       const data = {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
+        user_name: req.body.username,
+        user_email: req.body.email,
+        user_password: req.body.password
       }
       let query = await User.findByEmail(data.email)
 
       if(query.length > 0){
-        res.render('pages/registerForm', {error: 'Error creating user, every user must have an unique email.'})
+        res.render('pages/registerForm', {error: 'Error creating user, each user must have an unique email.'})
         return
       }
 

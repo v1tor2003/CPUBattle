@@ -26,22 +26,20 @@ app.use(session({
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-
-
 // custom routes
 app.use(authRouter)
 
 // layout extension to improve views rendering
 app.use(expressLayouts)
-app.use(userRouter)
 app.use(benchRouter)
+app.use(userRouter)
 
 // assets
 app.use(express.static('public'))
 app.use('/js', express.static(path.join(ROOT_DIR, 'public/js')))
 app.use('/img', express.static(path.join(ROOT_DIR, 'public/img')))
 app.use('/css', express.static(path.join(ROOT_DIR, 'node_modules', 'bootstrap', 'dist','css')))
-
+//app.use('/js', express.static(path.join(ROOT_DIR, 'node_modules', 'bootstrap', 'dist', 'js')))
 
 // setting rendering engine to ejs
 app.set('views', './views')

@@ -1,0 +1,42 @@
+<div class="modal fade" id="viewModal<%=bench.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">View Benchmark</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form>
+                <div class="form-group mt-2 fw-bold">
+                  Benchmark Results
+                </div>
+                <div class="form-group">
+                  <label>Multi-Thread Score</label>
+                  <p> <%= bench.mult_score %></p>
+                </div>
+                <div class="form-group">
+                  <label>Single-Thread Score</label>
+                  <p> <%= bench.single_score %></p>
+                </div>
+                <div class="form-group mt-2 fw-bold">
+                  Benched by
+                </div>
+                <div class="form-group">
+                  <p> <%= bench.user_name %> at <%= bench.benched_at %></p>
+                </div>
+                <div class="form-group mt-2 fw-bold">
+                  Processor
+                </div>
+                <div class="form-group">
+                  <p> <%= bench.manufacturer_name%> <%= bench.processor_model%>, <%= bench.processor_cores%>c/<%= bench.processor_threads%>t, at <%= bench.processor_speed%>MHz </p>
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
