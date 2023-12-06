@@ -13,7 +13,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
-        <% if(user) { %>
+        <% if(typeof user !=='undefined' && typeof user !== null) { %>
           <li class="nav-item me-2">
             <a href="/logout" class="btn btn-outline-primary fs-10">Log Out</a>
           </li>

@@ -24,18 +24,40 @@ export default class Model {
   }
 
   async update(data){
+    let id = ''
+
+    switch (this.tableName) {
+      case 'processors':
+        id = 'processor_id'
+        this.fillableColumns.pop('bench_fk')
+        this.fillableColumns.pop('manu_fk')
+        break;
+      case 'benchmarks':
+        id = 'bench_id'
+        this.fillableColumns.pop(['user_fk'])
+        break;
+      case 'users':
+          id = 'user_id'
+      default:
+        break;
+    }
+
     const setStatemments = this.fillableColumns.map(colmun => `${colmun} = ?`).join(', ')
     const params = this.fillableColumns.map(colmun => data[colmun])
     params.push(data.id)
 
-    const sql = `UPDATE ${this.tableName} SET ${setStatemments} WHERE id = ?`
+    const sql = `UPDATE ${this.tableName} SET ${setStatemments} WHERE ${id} = ?`
     
     return await this.performQuery(sql, params)
   }
 
   async delete(data){
+    let idColumn = ''
+    if(this.tableName === 'processors')
+      idColumn = 'bench_fk'
+    else idColumn = 'bench_id'
+    const sql = `DELETE FROM ${this.tableName} WHERE ${idColumn} = ?`
     const params = [data.id] 
-    const sql = `DELETE FROM ${this.tableName} WHERE id = ?`
     
     return await this.performQuery(sql, params)
   }

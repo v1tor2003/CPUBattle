@@ -6,7 +6,8 @@ class Processor extends Model{
                                       'processor_cores',
                                       'processor_threads',
                                       'processor_speed',
-                                    'bench_fk', 'manu_fk'])}
+                                     'bench_fk',
+                                     'manu_fk'])}
  
 }
 

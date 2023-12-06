@@ -1,4 +1,4 @@
-<div class="modal fade" id="deleteModal<%=bench.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal<%=bench.bench_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
@@ -8,7 +8,7 @@
               </button>
           </div>
           <div class="modal-body">
-            <form action="/delete-benchmark/<%= bench.id %>" method="DELETE">
+            <form action="/delete-benchmark/<%= bench.bench_id %>" method="POST">
               <div class="form-group mt-2 fw-semi-bold">
                 Are you sure you want delete this benchmark?
               </div>

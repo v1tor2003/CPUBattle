@@ -1,4 +1,4 @@
-<div class="modal fade" id="viewModal<%=bench.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewModal<%=bench.bench_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
@@ -30,7 +30,7 @@
                   Processor
                 </div>
                 <div class="form-group">
-                  <p> <%= bench.manufacturer_name%> <%= bench.processor_model%>, <%= bench.processor_cores%>c/<%= bench.processor_threads%>t, at <%= bench.processor_speed%>MHz </p>
+                  <p> <%= bench.manufacturer_name %> <%= bench.processor_model%>, <%= bench.processor_cores%>c/<%= bench.processor_threads%>t, at <%= bench.processor_speed%>GHz </p>
                 </div>
               </form>
           </div>

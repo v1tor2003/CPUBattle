@@ -13,8 +13,8 @@
       <%= success %>
     </div>
   <% } %>
-  <% if(user) {%>
-    <h2>Logged as <%= user.user_name %></h2>
+  <% if(typeof user !== 'undefined' && user !== null) {%>
+    <h2>Logged in as <%= user.user_name %></h2>
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Create a new Benchmark</button>
   <% } %>
   <h2>Results From Our Database</h2>
@@ -32,29 +32,28 @@
       </tr>
     </thead>
     <tbody>
-      
-      <% if(data.row_count) {%>
-      <h3>Found: <%=data.row_count%> records</h3>
-      <% } %>
+      <% if(typeof data !== 'undefined' && data !== null) {%>
       <% data.forEach(bench => { %>
           <tr></tr>
-          <th scope="row"><%= bench.id %></th>
-          <td><%= bench.mutl_score %></td>
+          <th scope="row"><%= bench.bench_id %></th>
+          <td><%= bench.mult_score %></td>
           <td><%= bench.processor_model %></td>
           <td><%= bench.benched_at %></td>
           <td><%= bench.user_name %></td>
           <td>
             <%- include('../components/viewModal.ejs', {bench}) %>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#viewModal<%= bench.id%>">View</button>
-             <% if(user) { %> 
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#viewModal<%= bench.bench_id%>">View</button>
+             <% if(typeof user !== 'undefined' && user !== null && bench.user_email ==  user.user_email) { %> 
               <%- include('../components/editModal.ejs', {bench}) %>
-              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editModal<%= bench.id%>">Edit</button>
+              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editModal<%= bench.bench_id%>">Edit</button>
               <%- include('../components/deleteModal.ejs', {bench}) %>
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<%= bench.id%>">Delete</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<%= bench.bench_id%>">Delete</button>
             <% } %> 
           </td>
         <%})%>
       </tr>
+      <% } %>
+
     </tbody>
   </table>
 </div>
