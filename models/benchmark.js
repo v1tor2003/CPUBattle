@@ -27,12 +27,10 @@ FROM benchmarks b
 INNER JOIN processors p ON b.bench_id = p.bench_fk
 INNER JOIN users u ON b.user_fk = u.user_id
 INNER JOIN manufacturers m ON p.manu_fk = m.manu_id
-GROUP BY b.bench_id, b.bench_mult_pontuation, b.bench_single_pontuation, b.bench_done_at, p.processor_model, m.manu_name, u.user_name;
-
-    `
-
+GROUP BY b.bench_id, b.bench_mult_pontuation, b.bench_single_pontuation, b.bench_done_at, p.processor_model, m.manu_name, u.user_name
+ORDER BY (b.bench_mult_pontuation) desc;
+`
     const params = []
-    
     return await super.performQuery(sql, params)
   }
  

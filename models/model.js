@@ -53,12 +53,13 @@ export default class Model {
 
   async delete(data){
     let idColumn = ''
+    
     if(this.tableName === 'processors')
       idColumn = 'bench_fk'
     else idColumn = 'bench_id'
     const sql = `DELETE FROM ${this.tableName} WHERE ${idColumn} = ?`
     const params = [data.id] 
-    
+
     return await this.performQuery(sql, params)
   }
 

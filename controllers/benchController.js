@@ -1,6 +1,7 @@
 import Benchmark from "../models/benchmark.js"
 import Processor from "../models/processor.js"
 import User from "../models/user.js"
+
 class BenchController{
   constructor(){}
   async index(req, res){

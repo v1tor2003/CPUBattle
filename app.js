@@ -7,7 +7,6 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import 'dotenv/config'
 
-import userRouter from './routes/userRoutes.js'
 import authRouter from './routes/authRoutes.js'
 import benchRouter from './routes/benchRoutes.js'
 
@@ -32,7 +31,6 @@ app.use(authRouter)
 // layout extension to improve views rendering
 app.use(expressLayouts)
 app.use(benchRouter)
-app.use(userRouter)
 
 // assets
 app.use(express.static('public'))
