@@ -46,7 +46,7 @@
              <% if(typeof user !== 'undefined' && user !== null && bench.user_email ==  user.user_email) { %> 
               <%- include('../components/editModal.ejs', {bench}) %>
               <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editModal<%= bench.bench_id%>">Edit</button>
-              <%- include('../components/deleteModal.ejs', {bench}) %>
+              <%- include('../components/deleteModal.ejs', {id: bench.bench_id}) %>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<%= bench.bench_id%>">Delete</button>
             <% } %> 
           </td>

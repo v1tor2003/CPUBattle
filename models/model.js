@@ -24,45 +24,40 @@ export default class Model {
   }
 
   async update(data){
-    let id = ''
-
-    switch (this.tableName) {
-      case 'processors':
-        id = 'processor_id'
-        this.fillableColumns.pop('bench_fk')
-        this.fillableColumns.pop('manu_fk')
-        break;
-      case 'benchmarks':
-        id = 'bench_id'
-        this.fillableColumns.pop(['user_fk'])
-        break;
-      case 'users':
-          id = 'user_id'
-      default:
-        break;
-    }
-
-    const setStatemments = this.fillableColumns.map(colmun => `${colmun} = ?`).join(', ')
-    const params = this.fillableColumns.map(colmun => data[colmun])
+    const tablePrimaryKey = await this.getPrimaryKey()
+    const setStatemmentsArray = this.fillableColumns.map(colmun => data[colmun] ? `${colmun} = ?` : '')
+    const colmuns = setStatemmentsArray.filter(colmun => colmun !== '').join(', ')
+    const params = this.fillableColumns.map(colmun => data[colmun]).filter(colmun => colmun !== undefined)
     params.push(data.id)
 
-    const sql = `UPDATE ${this.tableName} SET ${setStatemments} WHERE ${id} = ?`
-    
+    const sql = `UPDATE ${this.tableName} SET ${colmuns} WHERE ${tablePrimaryKey} = ?`
     return await this.performQuery(sql, params)
+  }
+
+  async getPrimaryKey(){
+    const sql = ` SELECT COLUMN_NAME 
+                  FROM INFORMATION_SCHEMA.COLUMNS
+                  WHERE TABLE_NAME = '${this.tableName}' 
+                  AND COLUMN_KEY = 'PRI' 
+                  AND DATA_TYPE = 'int'`;
+    const params = []
+    const res = await this.performQuery(sql, params)
+    
+    return (res[0].COLUMN_NAME)
   }
 
   async delete(data){
-    let idColumn = ''
-    
-    if(this.tableName === 'processors')
-      idColumn = 'bench_fk'
-    else idColumn = 'bench_id'
-    const sql = `DELETE FROM ${this.tableName} WHERE ${idColumn} = ?`
-    const params = [data.id] 
-
-    return await this.performQuery(sql, params)
+    try{
+      const tablePrimaryKey = await this.getPrimaryKey()
+      const sql = `DELETE FROM ${this.tableName} WHERE ${tablePrimaryKey} = ?`
+      const params = [data.id] 
+  
+      return await this.performQuery(sql, params)  
+    }catch(err){
+      console.error(err)
+      throw err
+    }
   }
-
 
   async insertAndGetId(data){
     try{

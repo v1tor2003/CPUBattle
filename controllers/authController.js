@@ -10,7 +10,7 @@ class AuthController{
   }
 
   async login(req, res){
-    console.log(req.body)
+    console.log('Loggin:', req.body)
     try {
       const userEmail = req.body.email
       const user = await User.findByEmail(userEmail)
@@ -38,7 +38,7 @@ class AuthController{
   }
 
   async register(req, res){
-    console.log(req.body)
+    console.log('Registering', req.body)
 
     try{
       const data = {

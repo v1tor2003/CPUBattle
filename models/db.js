@@ -1,11 +1,8 @@
 import 'dotenv/config'
 import mysql from 'mysql'
-import Singleton from '../utils/Singleton.js';
 
 class DataBase{
   constructor(params){
-    //super('DataBase')
-    
     if (!this.connection) {
       this.connection = mysql.createConnection(params);
 
